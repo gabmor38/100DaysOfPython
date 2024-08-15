@@ -13,5 +13,6 @@ symbols = random.sample(symbols,  nr_symbols)
 numbers = random.sample(numbers, nr_numbers)
 
 password = letter + symbols + numbers
+random.shuffle(password)
 
 print(''.join(password))
