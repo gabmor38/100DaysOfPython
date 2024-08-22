@@ -1,5 +1,66 @@
 import random
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
 word_list = ["aardvark", "baboon", "camel"]
+
+# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left.
+#  Set 'lives' to equal 6.
+
+lives = 6
 
 chosen_word = random.choice(word_list)
 print(chosen_word)
@@ -10,30 +71,37 @@ for position in range(word_length):
     placeholder += "_"
 print(placeholder)
 
-# TODO-1: - Use a while loop to let the user guess again.
-
 game_over = False
-
-guessedLetters = []
+correct_letters = []
 
 while not game_over:
     guess = input("Guess a letter: ").lower()
 
     display = ""
 
-    # TODO-2: Change the for loop so that you keep the previous correct letters in display.
-
     for letter in chosen_word:
         if letter == guess:
             display += letter
-            guessedLetters.append(guess)
-        elif letter in guessedLetters:
+            correct_letters.append(guess)
+        elif letter in correct_letters:
             display += letter
         else:
             display += "_"
 
+    print(display)
+
+
+    # TODO-2: - If guess is not a letter in the chosen_word, Then reduce 'lives' by 1.
+    #  If lives goes down to 0 then the game should stop and it should print "You lose."
+    if guess not in chosen_word:
+        lives = lives - 1
+        print(f"lives:{lives}")
+    if lives == 0:
+        print("You lose")
+
     if "_" not in display:
         game_over = True
+        print("You win.")
 
-    print(f"display:{display}")
-
+    # TODO-3: - print the ASCII art from 'stages'
+    #  that corresponds to the current number of 'lives' the user has remaining.
